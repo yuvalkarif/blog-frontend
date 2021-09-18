@@ -3,10 +3,10 @@ import Theme from "../../constants/theme";
 export const Wrapper = styled.div`
   //Grid
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 2fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-    "title title title"
+    "title title comment"
     "body body ."
     "info info arrow";
   //Pos
@@ -22,25 +22,41 @@ export const Wrapper = styled.div`
     grid-area: title;
     margin: 0.5rem 0rem;
     color: ${({ theme }) => theme.titleColor};
+    &:first-letter {
+      text-transform: capitalize;
+    }
   }
   & > p {
     grid-area: body;
     font-size: 1rem;
   }
-  & > svg {
+  .arrow {
     grid-area: arrow;
     justify-self: end;
     align-self: end;
     width: 1.75em;
     fill: ${({ theme }) => theme.accentColor};
     transition: transform 50ms ease-in-out;
-
+    pointer-events: auto;
     &:hover {
       cursor: pointer;
       transform: scale(115%);
     }
   }
-  .info {
+  .comments {
+    /* fill: ${({ theme }) => theme.accentColor}; */
+    grid-area: comment;
+    display: flex;
+    justify-self: end;
+    align-items: center;
+    justify-content: center;
+    color: ${({ theme }) => theme.titleColor};
+    svg {
+      padding-top: 0.1em;
+      margin-left: 0.1em;
+      height: 1.2em;
+      fill: ${({ theme }) => theme.titleColor};
+    }
   }
 `;
 
@@ -58,14 +74,5 @@ export const InfoContainer = styled.div`
     margin-top: 0.2em;
     font-size: 0.75em;
     font-weight: 500;
-  }
-  svg {
-    height: 1.2em;
-    fill: ${({ theme }) => theme.mainColor};
-  }
-  .comments {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 `;

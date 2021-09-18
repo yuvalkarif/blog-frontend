@@ -1,13 +1,22 @@
 import Feed from "./components/Feed/index";
 import { ThemeProvider } from "styled-components";
 import Theme from "./constants/theme";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PostPage from "./components/PostPage";
 function App() {
   return (
-    <div className="App">
+    <Router className="App" basename={"/v"}>
       <ThemeProvider theme={Theme}>
-        <Feed></Feed>
+        <Switch>
+          <Route exact path="/">
+            <Feed></Feed>
+          </Route>
+          <Route exact path="/post/:id">
+            <PostPage />
+          </Route>
+        </Switch>
       </ThemeProvider>
-    </div>
+    </Router>
   );
 }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getPosts } from "../../helpers/api";
 import Post from "../Post";
 import { Wrapper } from "./feed.styles";
+
 const Feed = () => {
   const [posts, setPosts] = useState();
 

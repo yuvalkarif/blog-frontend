@@ -4,10 +4,19 @@ export const getPosts = async () => {
   try {
     posts = await axios.get("http://localhost:8080/api/post/all");
   } catch (error) {
-    return "error";
+    return error;
   }
 
   return await posts.data.posts;
+};
+export const getPostByID = async (postID) => {
+  let post;
+  try {
+    post = await axios.get(`http://localhost:8080/api/post/${postID}`);
+  } catch (error) {
+    return error;
+  }
+  return await post.data.post;
 };
 
 // export const getPosts = () => {
