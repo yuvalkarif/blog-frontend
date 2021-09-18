@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Wrapper = styled.div`
   width: clamp(45%, 680px, 92%);
@@ -52,9 +52,18 @@ export const InfoContainer = styled.div`
   }
   font-size: 1rem;
 `;
+const rotate = keyframes`
+  from {
+    transform: scale(100%);
+  }
 
+  to {
+    transform: scale(110%);
+  }
+`;
 export const CommentsWrapper = styled.section`
   width: clamp(45%, 680px, 92%);
+  min-height: 2rem;
   margin: 2.5rem auto;
   padding: min(3.5%, 1.5rem);
   border-radius: 1rem;
@@ -67,6 +76,12 @@ export const CommentsWrapper = styled.section`
   flex-direction: column;
   gap: 0.35em;
   position: relative;
+  transition: transform ease-in-out;
+  .pulse {
+    svg {
+      animation: ${rotate} 1s alternate infinite;
+    }
+  }
   .plus {
     position: absolute;
     justify-self: end;
@@ -98,9 +113,51 @@ export const CommentContainer = styled.div`
     }
     p {
       align-self: center;
-      font-size: 0.5em;
+      font-size: 0.6em;
 
       color: ${({ theme }) => theme.mainColor};
+    }
+  }
+`;
+
+export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 90%;
+  min-width: 90%;
+  h3 {
+    color: ${({ theme }) => theme.titleColor};
+    margin: 0.5rem 0;
+    margin-top: 0;
+  }
+  textarea,
+  input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border-radius: 1rem;
+    font: inherit;
+    border: none;
+    background-color: ${({ theme }) => theme.bgColor};
+    color: ${({ theme }) => theme.titleColor};
+    margin: 0.5rem 0;
+    padding: 0.85rem 0.65rem;
+  }
+  button {
+    border-radius: 1rem;
+    border: none;
+    min-width: 20%;
+    padding: 0.85rem 0.65rem;
+    font-family: inherit;
+    font-weight: 600;
+    margin-inline: auto -1.5em;
+    background-color: ${({ theme }) => theme.bgColor};
+    color: ${({ theme }) => theme.accentColor};
+    &:hover {
+      color: ${({ theme }) => theme.bgColor};
+      background-color: ${({ theme }) => theme.accentColor};
+      cursor: pointer;
     }
   }
 `;

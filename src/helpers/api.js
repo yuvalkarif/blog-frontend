@@ -18,7 +18,19 @@ export const getPostByID = async (postID) => {
   }
   return await post.data.post;
 };
-
+export const createComment = async (postID, comment) => {
+  let post;
+  const { username, body } = comment;
+  try {
+    post = await axios.post(
+      `http://localhost:8080/api/post/${postID}/comment`,
+      { username, body }
+    );
+  } catch (error) {
+    return error;
+  }
+  return await post.data;
+};
 // export const getPosts = () => {
 //   let posts = async () => {
 //     let data;
