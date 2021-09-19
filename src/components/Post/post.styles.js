@@ -18,10 +18,25 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.blockColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
+  &:hover {
+    h2::after {
+      width: 100%;
+    }
+  }
+
   & > h2 {
     grid-area: title;
     margin: 0.5rem 0rem;
     color: ${({ theme }) => theme.titleColor};
+    &::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0.15em;
+      background: ${({ theme }) => theme.accentColor};
+      transition: width 200ms ease-in-out;
+    }
+
     &:first-letter {
       text-transform: capitalize;
     }

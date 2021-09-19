@@ -46,3 +46,8 @@ export const FormContainer = styled.form`
     }
   }
 `;
+
+export const ErrorMessage = styled.div`
+  margin: 0.5em auto;
+  color: red;
+`;

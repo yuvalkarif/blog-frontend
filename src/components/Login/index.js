@@ -1,21 +1,31 @@
 import { useState } from "react";
-import { FormContainer, Wrapper } from "./Login.styles";
+import { ErrorMessage, FormContainer, Wrapper } from "./Login.styles";
 import { Submit } from "../PostAdd/PostAdd.styles";
 import { handleLogin } from "../../helpers/api";
+import { useHistory } from "react-router";
 
 export default function Login() {
   const [user, setUser] = useState({ username: "", password: "" });
-  const [newUser, setNewUser] = useState();
+  const [error, setError] = useState();
+  const history = useHistory();
   const onLogin = async (e) => {
     e.preventDefault();
-    console.log(user);
-    const newPost = await handleLogin(user);
-    setNewUser(newPost);
+    const res = await handleLogin(user);
+    if (res instanceof Error || typeof res == TypeError) {
+      res.response
+        ? setError(res.response.data.msg)
+        : setError(res.message.toString());
+    } else {
+      localStorage.clear();
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", res.data.user.displayname);
+    }
   };
+
   return (
     <Wrapper>
-      {newUser && console.log(newUser)}
       <h2>Please log in dear blogger !</h2>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <FormContainer onSubmit={onLogin}>
         <label htmlFor="username">
           <span>Username</span>

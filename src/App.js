@@ -1,5 +1,10 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { lazy, Suspense, useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Theme from "./constants/theme";
 import Loading from "./components/Loading";
@@ -9,11 +14,24 @@ function App() {
   const PostAdd = lazy(() => import("./components/PostAdd"));
   const Feed = lazy(() => import("./components/Feed"));
   const Login = lazy(() => import("./components/Login"));
+  const Header = lazy(() => import("./components/Header"));
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    console.log(loggedInUser);
+    if (loggedInUser) {
+      const foundUser = JSON.stringify(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
   return (
     <Router className="App" basename={"/view"}>
       <ThemeProvider theme={Theme}>
+        <Redirect to="/" />
         <Switch>
           <Suspense fallback={<Loading />}>
+            <Header />
+
             <Route exact path="/">
               <Feed></Feed>
             </Route>
@@ -23,8 +41,8 @@ function App() {
             <Route exact path="/edit">
               <PostAdd></PostAdd>
             </Route>
-            <Route exact path="/login">
-              <Login />
+            <Route exact path="/admin">
+              {user ? <p>hey admin {user}</p> : <Login />}
             </Route>
           </Suspense>
         </Switch>

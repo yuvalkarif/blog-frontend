@@ -33,19 +33,17 @@ export const createComment = async (postID, comment) => {
 };
 
 export const handleLogin = async (user) => {
-  console.log("loggin in", user);
   const { username, password } = user;
-  let login;
+
   try {
-    login = await axios.post("http://localhost:8080/api/login", {
+    if (!username || !password) {
+      throw Error("Fill in your Credentials");
+    }
+    return await axios.post("http://localhost:8080/api/login", {
       username,
       password,
     });
-    console.log("wtf");
   } catch (error) {
-    console.log("wtf");
     return error;
   }
-
-  return login.data;
 };
