@@ -31,12 +31,21 @@ export const createComment = async (postID, comment) => {
   }
   return await post.data;
 };
-// export const getPosts = () => {
-//   let posts = async () => {
-//     let data;
-//     data = await fetch("http://localhost:8080/api/post/all", {
-//       method: "GET",
-//     });
-//     return await data.json();
-//   };
-// };
+
+export const handleLogin = async (user) => {
+  console.log("loggin in", user);
+  const { username, password } = user;
+  let login;
+  try {
+    login = await axios.post("http://localhost:8080/api/login", {
+      username,
+      password,
+    });
+    console.log("wtf");
+  } catch (error) {
+    console.log("wtf");
+    return error;
+  }
+
+  return login.data;
+};

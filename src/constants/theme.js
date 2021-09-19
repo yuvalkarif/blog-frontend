@@ -5,6 +5,7 @@ const Theme = {
   titleColor: "#000",
   mainColor: "#515263",
   shadowColor: "62, 71, 86",
+  accentColorRGB: "83,116,255",
 };
 
 export default Theme;

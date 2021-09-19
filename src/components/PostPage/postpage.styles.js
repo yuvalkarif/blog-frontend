@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
     "info info info";
   //Pos
   padding: min(3.5%, 1.5rem);
-
   border-radius: 1rem;
   //Color and Styles
   color: ${({ theme }) => theme.mainColor};
@@ -54,11 +53,14 @@ export const InfoContainer = styled.div`
 `;
 const rotate = keyframes`
   from {
-    transform: scale(100%);
+    transform: scale(1.0);
+    /* width: 1.75em; */
   }
 
   to {
-    transform: scale(110%);
+    transform: scale(1.2);
+    /* width: 2em; */
+
   }
 `;
 export const CommentsWrapper = styled.section`
@@ -79,13 +81,14 @@ export const CommentsWrapper = styled.section`
   transition: transform ease-in-out;
   .pulse {
     svg {
-      animation: ${rotate} 1s alternate infinite;
+      animation: ${rotate} 600ms alternate infinite;
     }
   }
   .plus {
     position: absolute;
     justify-self: end;
     align-self: end;
+
     svg {
       width: 1.75em;
       fill: ${({ theme }) => theme.accentColor};
@@ -100,6 +103,8 @@ export const CommentsWrapper = styled.section`
 `;
 
 export const CommentContainer = styled.div`
+  border-bottom: 3px solid rgba(${({ theme }) => theme.accentColorRGB}, 0.35);
+  padding: 0.5em 0;
   font-size: 1rem;
   h3 {
     display: flex;
@@ -150,7 +155,8 @@ export const FormContainer = styled.form`
     min-width: 20%;
     padding: 0.85rem 0.65rem;
     font-family: inherit;
-    font-weight: 600;
+    font-weight: 800;
+    font-size: 1.05rem;
     margin-inline: auto -1.5em;
     background-color: ${({ theme }) => theme.bgColor};
     color: ${({ theme }) => theme.accentColor};
