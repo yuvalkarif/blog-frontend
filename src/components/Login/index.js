@@ -4,27 +4,29 @@ import { Submit } from "../PostAdd/PostAdd.styles";
 import { handleLogin } from "../../helpers/api";
 import { useHistory } from "react-router";
 
-export default function Login() {
-  const [user, setUser] = useState({ username: "", password: "" });
+export default function Login({ setUser }) {
+  const [loginUser, setLoginUser] = useState({ username: "", password: "" });
   const [error, setError] = useState();
   const history = useHistory();
   const onLogin = async (e) => {
     e.preventDefault();
-    const res = await handleLogin(user);
+    const res = await handleLogin(loginUser);
     if (res instanceof Error || typeof res == TypeError) {
       res.response
         ? setError(res.response.data.msg)
         : setError(res.message.toString());
     } else {
       localStorage.clear();
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", res.data.user.displayname);
+      localStorage.setItem("token", JSON.stringify(res.data.token));
+      localStorage.setItem("user", JSON.stringify(res.data.user.displayname));
+      setUser({ username: res.data.user.displayname, token: res.data.token });
+      history.replace("/admin");
     }
   };
 
   return (
     <Wrapper>
-      <h2>Please log in dear blogger !</h2>
+      <h2>Please log in blogger !</h2>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <FormContainer onSubmit={onLogin}>
         <label htmlFor="username">
@@ -34,7 +36,7 @@ export default function Login() {
             name="username"
             placeholder=""
             onChange={(e) => {
-              setUser({ ...user, username: `${e.target.value}` });
+              setLoginUser({ ...loginUser, username: `${e.target.value}` });
             }}
           ></input>
         </label>
@@ -45,7 +47,7 @@ export default function Login() {
             name="password"
             placeholder=""
             onChange={(e) => {
-              setUser({ ...user, password: `${e.target.value}` });
+              setLoginUser({ ...loginUser, password: `${e.target.value}` });
             }}
           ></input>
         </label>

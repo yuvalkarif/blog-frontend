@@ -23,9 +23,7 @@ export default function PostPage() {
     e.preventDefault();
     const newPost = await createComment(id, comment);
   };
-  const handleClick = () => {
-    setEmpty(!empty);
-  };
+  const handleClick = () => {};
 
   useEffect(() => {
     getPostByID(id).then((results) => {

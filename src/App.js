@@ -15,12 +15,16 @@ function App() {
   const Feed = lazy(() => import("./components/Feed"));
   const Login = lazy(() => import("./components/Login"));
   const Header = lazy(() => import("./components/Header"));
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({ username: "", token: "" });
   useEffect(() => {
+    console.log(process.env.REACT_APP_API_URL);
     const loggedInUser = localStorage.getItem("user");
-    console.log(loggedInUser);
-    if (loggedInUser) {
-      const foundUser = JSON.stringify(loggedInUser);
+    const loggedInToken = localStorage.getItem("token");
+    if (loggedInUser && loggedInToken) {
+      const foundUser = {
+        username: JSON.parse(loggedInUser),
+        token: JSON.parse(loggedInToken),
+      };
       setUser(foundUser);
     }
   }, []);
@@ -33,7 +37,7 @@ function App() {
             <Header />
 
             <Route exact path="/">
-              <Feed></Feed>
+              <Feed user={user} />
             </Route>
             <Route exact path="/post/:id">
               <PostPage />
@@ -42,7 +46,14 @@ function App() {
               <PostAdd></PostAdd>
             </Route>
             <Route exact path="/admin">
-              {user ? <p>hey admin {user}</p> : <Login />}
+              {user.username && user.token ? (
+                <PostAdd user={user} />
+              ) : (
+                <Redirect to="/login" />
+              )}
+            </Route>
+            <Route exact path="/login">
+              <Login setUser={setUser} />
             </Route>
           </Suspense>
         </Switch>

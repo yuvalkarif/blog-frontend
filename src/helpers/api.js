@@ -1,4 +1,5 @@
 import axios from "axios";
+const url = process.env.REACT_APP_API_URL;
 export const getPosts = async () => {
   let posts;
   try {
@@ -39,9 +40,45 @@ export const handleLogin = async (user) => {
     if (!username || !password) {
       throw Error("Fill in your Credentials");
     }
-    return await axios.post("http://localhost:8080/api/login", {
+    return await axios.post(`${url}/api/login`, {
       username,
       password,
+    });
+  } catch (error) {
+    return error;
+  }
+};
+export const createPost = async (user, post) => {
+  const { username, token } = user;
+  const { body, title } = post;
+  try {
+    if (!body || !title) {
+      throw Error("Fill in Title and Body of the Post");
+    }
+    return await axios.post(
+      `${url}/api/post`,
+      {
+        body,
+        title,
+        author: username,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    return error;
+  }
+};
+export const deletePost = async (user, postID) => {
+  const { token } = user;
+  try {
+    return await axios.delete(`${url}/api/post/${postID}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     });
   } catch (error) {
     return error;

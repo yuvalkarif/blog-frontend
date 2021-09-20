@@ -2,15 +2,22 @@ import { Submit, Wrapper } from "./PostAdd.styles";
 import { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import Loading from "../Loading";
-import { handleLogin } from "../../helpers/api";
+import { createPost } from "../../helpers/api";
+import { useHistory } from "react-router";
 
-export default function PostAdd() {
+export default function PostAdd({ user }) {
   const editorRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
-  const log = () => {
+  const handleSubmit = () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+      let body = editorRef.current.getContent({ format: "text" });
+      const title = body.split("\n")[0];
+      createPost(user, { title, body }).then((res) => {
+        history.push(`/post/${res.data.post._id}`);
+        // history.go(0);
+      });
     }
   };
   return (
@@ -39,7 +46,7 @@ export default function PostAdd() {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <Submit onClick={log}>Submit</Submit>
+      <Submit onClick={handleSubmit}>Submit</Submit>
     </Wrapper>
   );
 }

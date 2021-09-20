@@ -3,7 +3,7 @@ import { getPosts } from "../../helpers/api";
 import Post from "../Post";
 import { Wrapper } from "./feed.styles";
 
-const Feed = () => {
+const Feed = ({ user }) => {
   const [posts, setPosts] = useState();
 
   useEffect(() => {
@@ -14,8 +14,7 @@ const Feed = () => {
       <div>
         {posts
           ? posts.map((post) => {
-              console.log(post.title);
-              return <Post info={post} />;
+              return <Post info={post} user={user} />;
             })
           : null}
       </div>

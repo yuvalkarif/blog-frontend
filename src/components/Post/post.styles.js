@@ -58,6 +58,7 @@ export const Wrapper = styled.div`
       transform: scale(115%);
     }
   }
+
   .comments {
     /* fill: ${({ theme }) => theme.accentColor}; */
     grid-area: comment;
@@ -66,11 +67,26 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     color: ${({ theme }) => theme.titleColor};
-    svg {
+    & > svg {
       padding-top: 0.1em;
       margin-left: 0.1em;
       height: 1.2em;
       fill: ${({ theme }) => theme.titleColor};
+    }
+
+    .delete {
+      svg {
+        justify-self: end;
+        align-self: center;
+        fill: ${({ theme }) => theme.redColor} !important;
+        transition: transform 50ms ease-in-out;
+        pointer-events: auto;
+        height: 1.2em;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.2, 1.2) translate3d(0, 0, 10px);
+        }
+      }
     }
   }
 `;
