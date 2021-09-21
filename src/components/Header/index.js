@@ -1,6 +1,6 @@
 import { Container, Wrapper } from "./Header.styles";
 import { useHistory } from "react-router";
-export default function Header() {
+export default function Header({ user, setUser }) {
   const history = useHistory();
   const goToFeed = () => {
     history.push(`/`);
@@ -8,6 +8,10 @@ export default function Header() {
   const goToAdmin = () => {
     history.push(`/admin`);
   };
+  function handleLogOut() {
+    setUser({ username: "", token: "" });
+    localStorage.clear();
+  }
   return (
     <Wrapper>
       <Container>
@@ -16,6 +20,11 @@ export default function Header() {
           {" "}
           <span onClick={goToFeed}>Feed</span>
           <span onClick={goToAdmin}>Admin</span>
+          {user.username && user.token && (
+            <span className="logout" onClick={() => handleLogOut()}>
+              Log Out
+            </span>
+          )}
         </div>
       </Container>
     </Wrapper>

@@ -32,6 +32,11 @@ export const Container = styled.div`
   div {
     display: flex;
   }
+  .logout {
+    ::after {
+      background: ${({ theme }) => theme.redColor};
+    }
+  }
   span {
     font-weight: 600;
     position: relative;

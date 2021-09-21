@@ -19,12 +19,17 @@ export default function Post({ info, user }) {
   };
   return (
     <Wrapper>
-      <h2 onClick={goToPost}>{info.title}</h2>
-      <p>{info.body}</p>
+      <h2 onClick={goToPost}>
+        {info.title.length > 35 ? info.title.slice(0, 35) + "..." : info.title}
+      </h2>
+      <p>
+        {info.body.length > 30 ? info.body.slice(0, 75) + "..." : info.body}
+      </p>
+      {info.body.length && console.log(info.body.length)}
       <div className="comments">
         <span>{info.comments.length}</span>
         <CommentSVG />
-        {user && (
+        {user.username && user.token && (
           <div className="delete" onClick={handleDelete}>
             <TrashSVG />
           </div>

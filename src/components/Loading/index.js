@@ -14,5 +14,9 @@ export default function Loading() {
       <animate attributeName="fill-opacity" values="0;0;1;1" calcMode="discrete" keyTimes="0;0.499;0.5;1" dur="1.1111111111111112s" repeatCount="indefinite"></animate>
     </circle>
    </svg>`;
-  return <InlineSVG src={svgSource}></InlineSVG>;
+  return (
+    <>
+      <InlineSVG src={svgSource}></InlineSVG>
+    </>
+  );
 }

@@ -4,11 +4,11 @@ export const Wrapper = styled.div`
   width: clamp(45%, 680px, 92%);
   margin: 2.5rem auto;
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 70% 2ch;
   grid-template-areas:
-    "title title comment"
-    "body body ."
+    "title title ."
+    "body body body"
     "info info info";
   //Pos
   padding: min(3.5%, 1.5rem);
@@ -79,6 +79,8 @@ export const CommentsWrapper = styled.section`
   gap: 0.35em;
   position: relative;
   transition: transform ease-in-out;
+  padding-top: 2em;
+
   .pulse {
     svg {
       animation: ${rotate} 600ms alternate infinite;
@@ -88,6 +90,7 @@ export const CommentsWrapper = styled.section`
     position: absolute;
     justify-self: end;
     align-self: end;
+    margin-top: -1em;
 
     svg {
       width: 1.75em;
@@ -109,6 +112,7 @@ export const CommentContainer = styled.div`
   h3 {
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
     gap: 0.25em;
     font-weight: 600;
     margin: 0.35em 0;
@@ -121,6 +125,22 @@ export const CommentContainer = styled.div`
       font-size: 0.6em;
 
       color: ${({ theme }) => theme.mainColor};
+    }
+  }
+  .delete {
+    justify-self: flex-end;
+    align-self: flex-end;
+    place-self: flex-end;
+    svg {
+      fill: ${({ theme }) => theme.redColor} !important;
+      transition: transform 50ms ease-in-out;
+      pointer-events: auto;
+      height: 1.2em;
+      margin-right: 0.335em;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.2, 1.2) translate3d(0, 0, 10px);
+      }
     }
   }
 `;

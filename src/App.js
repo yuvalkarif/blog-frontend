@@ -17,7 +17,6 @@ function App() {
   const Header = lazy(() => import("./components/Header"));
   const [user, setUser] = useState({ username: "", token: "" });
   useEffect(() => {
-    console.log(process.env.REACT_APP_API_URL);
     const loggedInUser = localStorage.getItem("user");
     const loggedInToken = localStorage.getItem("token");
     if (loggedInUser && loggedInToken) {
@@ -29,18 +28,17 @@ function App() {
     }
   }, []);
   return (
-    <Router className="App" basename={"/view"}>
+    <Router basename={"/view"}>
       <ThemeProvider theme={Theme}>
         <Redirect to="/" />
         <Switch>
           <Suspense fallback={<Loading />}>
-            <Header />
-
+            <Header user={user} setUser={setUser} />
             <Route exact path="/">
               <Feed user={user} />
             </Route>
             <Route exact path="/post/:id">
-              <PostPage />
+              <PostPage user={user} />
             </Route>
             <Route exact path="/edit">
               <PostAdd></PostAdd>

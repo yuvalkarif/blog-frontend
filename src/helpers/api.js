@@ -32,6 +32,20 @@ export const createComment = async (postID, comment) => {
   }
   return await post.data;
 };
+export const deleteComment = async (postID, commentID, user) => {
+  const { token } = user;
+  let data;
+  try {
+    data = await axios.delete(`${url}/api/post/${postID}/${commentID}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    return error;
+  }
+  return data;
+};
 
 export const handleLogin = async (user) => {
   const { username, password } = user;

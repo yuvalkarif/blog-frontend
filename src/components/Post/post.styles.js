@@ -11,13 +11,16 @@ export const Wrapper = styled.div`
     "info info arrow";
   //Pos
   padding: 1.5rem;
-  margin: 2.5rem 0;
+  margin: 0rem 0;
   border-radius: 1rem;
   //Color and Styles
   color: ${({ theme }) => theme.mainColor};
   background-color: ${({ theme }) => theme.blockColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
+  h2 {
+    width: fit-content;
+  }
   &:hover {
     h2::after {
       width: 100%;
@@ -93,8 +96,8 @@ export const Wrapper = styled.div`
 
 export const InfoContainer = styled.div`
   grid-area: info;
-  /* align-self: end;
-  justify-self: start; */
+  align-self: end;
+
   display: flex;
   gap: 1rem;
 
