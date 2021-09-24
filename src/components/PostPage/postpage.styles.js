@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
       text-transform: capitalize;
     }
   }
-  & > p {
+  .body {
     grid-area: body;
     font-size: 1rem;
   }
@@ -136,7 +136,7 @@ export const CommentContainer = styled.div`
       transition: transform 50ms ease-in-out;
       pointer-events: auto;
       height: 1.2em;
-      margin-right: 0.335em;
+      margin-right: 0.33em;
       &:hover {
         cursor: pointer;
         transform: scale(1.2, 1.2) translate3d(0, 0, 10px);

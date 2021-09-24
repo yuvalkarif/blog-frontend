@@ -9,8 +9,10 @@ export const PostsContainer = styled.div`
   margin: 1em;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  /* align-items: flex-start; */
+  align-content: flex-start;
   justify-content: start;
+
   gap: 1em;
   & > * {
     flex-grow: 1;

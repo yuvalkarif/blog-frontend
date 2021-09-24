@@ -12,11 +12,12 @@ export default function PostAdd({ user }) {
 
   const handleSubmit = () => {
     if (editorRef.current) {
-      let body = editorRef.current.getContent({ format: "text" });
-      const title = body.split("\n")[0];
+      const body = editorRef.current.getContent();
+      const bodyTitle = editorRef.current.getContent({ format: "text" });
+      const title = bodyTitle.split("\n")[0];
       createPost(user, { title, body }).then((res) => {
         history.push(`/post/${res.data.post._id}`);
-        // history.go(0);
+        history.go(0);
       });
     }
   };
@@ -40,8 +41,8 @@ export default function PostAdd({ user }) {
           toolbar:
             "undo redo | formatselect | " +
             "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat | help",
+            "alignright alignjustify | link image| bullist numlist outdent indent | ",
+
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}

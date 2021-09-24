@@ -11,6 +11,7 @@ import {
   Wrapper,
 } from "./postpage.styles";
 import PlusSVG from "../../svg/plus";
+import ReactMarkdown from "react-markdown";
 
 export default function PostPage({ user }) {
   const { id } = useParams();
@@ -31,15 +32,19 @@ export default function PostPage({ user }) {
   const handleClick = () => {};
 
   async function handleDelete(commentID) {
-    console.log(await deleteComment(id, commentID, user));
+    await deleteComment(id, commentID, user);
     history.go(0);
   }
 
   useEffect(() => {
-    getPostByID(id).then((results) => {
+    if (id) {
+      setup();
+    }
+    async function setup() {
+      let results = await getPostByID(id);
       setPost(results);
       setEmpty(!!results.comments.length);
-    });
+    }
   }, [id]);
 
   return (
@@ -48,7 +53,8 @@ export default function PostPage({ user }) {
         <>
           <Wrapper>
             <h2>{post.title}</h2>
-            <p>{post.body}</p>
+
+            <ReactMarkdown className="body">{post.body}</ReactMarkdown>
 
             <InfoContainer>
               <h2>

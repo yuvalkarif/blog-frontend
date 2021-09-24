@@ -4,6 +4,7 @@ import CommentSVG from "../../svg/comment";
 import TrashSVG from "../../svg/trash";
 import { useHistory } from "react-router-dom";
 import { deletePost } from "../../helpers/api";
+// import ReactMarkdown from "react-markdown";
 export default function Post({ info, user }) {
   const history = useHistory();
   const goToPost = () => {
@@ -22,9 +23,9 @@ export default function Post({ info, user }) {
       <h2 onClick={goToPost}>
         {info.title.length > 35 ? info.title.slice(0, 35) + "..." : info.title}
       </h2>
-      <p>
+      {/* <ReactMarkdown className="body">
         {info.body.length > 30 ? info.body.slice(0, 75) + "..." : info.body}
-      </p>
+      </ReactMarkdown> */}
       {info.body.length && console.log(info.body.length)}
       <div className="comments">
         <span>{info.comments.length}</span>

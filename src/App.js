@@ -12,6 +12,7 @@ import Loading from "./components/Loading";
 function App() {
   const PostPage = lazy(() => import("./components/PostPage"));
   const PostAdd = lazy(() => import("./components/PostAdd"));
+  const PostMDE = lazy(() => import("./components/PostMDE"));
   const Feed = lazy(() => import("./components/Feed"));
   const Login = lazy(() => import("./components/Login"));
   const Header = lazy(() => import("./components/Header"));
@@ -44,8 +45,9 @@ function App() {
               <PostAdd></PostAdd>
             </Route>
             <Route exact path="/admin">
-              {user.username && user.token ? (
-                <PostAdd user={user} />
+              {user.username || user.token ? (
+                // <PostAdd user={user} />
+                <PostMDE user={user} />
               ) : (
                 <Redirect to="/login" />
               )}

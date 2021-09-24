@@ -1,17 +1,17 @@
 import styled from "styled-components";
-import Theme from "../../constants/theme";
+
 export const Wrapper = styled.div`
   //Grid
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: auto;
   grid-template-areas:
     "title title comment"
     "body body ."
     "info info arrow";
+
   //Pos
   padding: 1.5rem;
-  margin: 0rem 0;
   border-radius: 1rem;
   //Color and Styles
   color: ${({ theme }) => theme.mainColor};
@@ -44,9 +44,11 @@ export const Wrapper = styled.div`
       text-transform: capitalize;
     }
   }
-  & > p {
+  .body {
     grid-area: body;
     font-size: 1rem;
+    max-height: 10ch;
+    overflow: hidden;
   }
   .arrow {
     grid-area: arrow;
