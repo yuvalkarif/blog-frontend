@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.blockColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
+
   & > h2 {
     grid-area: title;
     margin: 0.5rem 0rem;
@@ -29,6 +30,11 @@ export const Wrapper = styled.div`
   .body {
     grid-area: body;
     font-size: 1rem;
+
+    img {
+      max-width: 100%;
+      margin: 0 auto;
+    }
   }
 `;
 export const InfoContainer = styled.div`

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getPosts } from "../../helpers/api";
 import Post from "../Post";
 import { PostsContainer, Wrapper } from "./feed.styles";
+import Loading from "../Loading/index";
 
 const Feed = ({ user }) => {
   const [posts, setPosts] = useState();
@@ -12,11 +13,13 @@ const Feed = ({ user }) => {
   return (
     <Wrapper>
       <PostsContainer>
-        {posts
-          ? posts.map((post) => {
-              return <Post info={post} user={user} />;
-            })
-          : null}
+        {posts ? (
+          posts.map((post) => {
+            return <Post info={post} user={user} />;
+          })
+        ) : (
+          <Loading />
+        )}
       </PostsContainer>
     </Wrapper>
   );

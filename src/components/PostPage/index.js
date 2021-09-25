@@ -12,6 +12,7 @@ import {
 } from "./postpage.styles";
 import PlusSVG from "../../svg/plus";
 import ReactMarkdown from "react-markdown";
+import { Link } from "react-router-dom";
 
 export default function PostPage({ user }) {
   const { id } = useParams();
@@ -37,9 +38,7 @@ export default function PostPage({ user }) {
   }
 
   useEffect(() => {
-    if (id) {
-      setup();
-    }
+    setup();
     async function setup() {
       let results = await getPostByID(id);
       setPost(results);
@@ -53,8 +52,11 @@ export default function PostPage({ user }) {
         <>
           <Wrapper>
             <h2>{post.title}</h2>
+            <Link to={`${id}/edit/`}>EDIT</Link>
 
-            <ReactMarkdown className="body">{post.body}</ReactMarkdown>
+            <ReactMarkdown className="body">
+              {decodeURIComponent(post.body)}
+            </ReactMarkdown>
 
             <InfoContainer>
               <h2>

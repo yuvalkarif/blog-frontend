@@ -1,16 +1,8 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  //Grid
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-    "title title comment"
-    "body body ."
-    "info info arrow";
+export const Container = styled.div`
+  display: flex;
 
-  //Pos
   padding: 1.5rem;
   border-radius: 1rem;
   //Color and Styles
@@ -18,8 +10,28 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.blockColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
+  gap: 1rem;
+  & > img {
+    max-width: 50%;
+    margin: 0;
+    aspect-ratio: initial;
+  }
+`;
+export const Wrapper = styled.div`
+  //Grid
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "title title comment"
+    "info info arrow";
+
+  //Pos
+
   h2 {
     width: fit-content;
+    margin: 0;
   }
   &:hover {
     h2::after {
@@ -29,8 +41,9 @@ export const Wrapper = styled.div`
 
   & > h2 {
     grid-area: title;
-    margin: 0.5rem 0rem;
+
     color: ${({ theme }) => theme.titleColor};
+
     &::after {
       content: "";
       display: block;
@@ -69,7 +82,7 @@ export const Wrapper = styled.div`
     grid-area: comment;
     display: flex;
     justify-self: end;
-    align-items: center;
+
     justify-content: center;
     color: ${({ theme }) => theme.titleColor};
     & > svg {

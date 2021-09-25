@@ -38,11 +38,14 @@ function App() {
             <Route exact path="/">
               <Feed user={user} />
             </Route>
+            <Route path="/post/:id/edit">
+              <PostMDE user={user} />
+            </Route>
             <Route exact path="/post/:id">
               <PostPage user={user} />
             </Route>
             <Route exact path="/edit">
-              <PostAdd></PostAdd>
+              <PostAdd />
             </Route>
             <Route exact path="/admin">
               {user.username || user.token ? (

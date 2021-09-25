@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = process.env.REACT_APP_API_URL;
+export const url = process.env.REACT_APP_API_URL;
 export const getPosts = async () => {
   let posts;
   try {
@@ -62,7 +62,32 @@ export const handleLogin = async (user) => {
     return error;
   }
 };
-export const createPost = async (user, post) => {
+export const updatePost = async (user, post, img) => {
+  const { username, token } = user;
+  const { body, title, id } = post;
+  try {
+    if (!body || !title || !id) {
+      throw Error("Fill in Title and Body of the Post");
+    }
+    return await axios.put(
+      `${url}/api/post/${id}`,
+      {
+        body: encodeURIComponent(body),
+        title,
+        author: username,
+        thumbnail: img,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    return error;
+  }
+};
+export const createPost = async (user, post, img) => {
   const { username, token } = user;
   const { body, title } = post;
   try {
@@ -72,9 +97,10 @@ export const createPost = async (user, post) => {
     return await axios.post(
       `${url}/api/post`,
       {
-        body,
+        body: encodeURIComponent(body),
         title,
         author: username,
+        thumbnail: img,
       },
       {
         headers: {
@@ -94,6 +120,16 @@ export const deletePost = async (user, postID) => {
         authorization: `Bearer ${token}`,
       },
     });
+  } catch (error) {
+    return error;
+  }
+};
+
+export const uploadThumbnail = async (file) => {
+  let formData = new FormData();
+  formData.append("thumbnail", file);
+  try {
+    return await axios.patch(`${url}/api/images/upload`, formData);
   } catch (error) {
     return error;
   }
