@@ -33,7 +33,7 @@ export const Submit = styled.button`
   font-size: 1.05rem;
   margin: 0 auto;
   margin-top: min(3.5%, 1.5rem);
-  background-color: ${({ theme }) => theme.bgColor};
+  background-color: ${({ theme }) => theme.blockColor};
   color: ${({ theme }) => theme.accentColor};
   &:hover {
     color: ${({ theme }) => theme.bgColor};

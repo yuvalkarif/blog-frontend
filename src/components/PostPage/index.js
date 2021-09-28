@@ -12,7 +12,7 @@ import {
 } from "./postpage.styles";
 import PlusSVG from "../../svg/plus";
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
+import EditSVG from "../../svg/edit";
 
 export default function PostPage({ user }) {
   const { id } = useParams();
@@ -45,14 +45,20 @@ export default function PostPage({ user }) {
       setEmpty(!!results.comments.length);
     }
   }, [id]);
-
+  const handleEdit = () => {
+    history.push(`${id}/edit/`);
+  };
   return (
     <>
       {post ? (
         <>
           <Wrapper>
             <h2>{post.title}</h2>
-            <Link to={`${id}/edit/`}>EDIT</Link>
+            {user.username && user.token && (
+              <div className="edit" onClick={handleEdit}>
+                <EditSVG />
+              </div>
+            )}
 
             <ReactMarkdown className="body">
               {decodeURIComponent(post.body)}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ErrorMessage, FormContainer, Wrapper } from "./Login.styles";
-import { Submit } from "../PostAdd/PostAdd.styles";
+import { Submit } from "../PostMDE/PostMDE.styles";
 import { handleLogin } from "../../helpers/api";
 import { useHistory } from "react-router";
 

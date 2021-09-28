@@ -13,7 +13,7 @@ const Feed = ({ user }) => {
   return (
     <Wrapper>
       <PostsContainer>
-        {posts ? (
+        {posts?.length ? (
           posts.map((post) => {
             return <Post info={post} user={user} />;
           })

@@ -3,7 +3,7 @@ export const url = process.env.REACT_APP_API_URL;
 export const getPosts = async () => {
   let posts;
   try {
-    posts = await axios.get("http://localhost:8080/api/post/all");
+    posts = await axios.get(`${url}/api/post/all`);
   } catch (error) {
     return error;
   }
@@ -13,7 +13,7 @@ export const getPosts = async () => {
 export const getPostByID = async (postID) => {
   let post;
   try {
-    post = await axios.get(`http://localhost:8080/api/post/${postID}`);
+    post = await axios.get(`${url}/api/post/${postID}`);
   } catch (error) {
     return error;
   }
@@ -23,10 +23,10 @@ export const createComment = async (postID, comment) => {
   let post;
   const { username, body } = comment;
   try {
-    post = await axios.post(
-      `http://localhost:8080/api/post/${postID}/comment`,
-      { username, body }
-    );
+    post = await axios.post(`${url}/api/post/${postID}/comment`, {
+      username,
+      body,
+    });
   } catch (error) {
     return error;
   }

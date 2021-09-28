@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export const Wrapper = styled.div`
-  width: clamp(45%, 680px, 92%);
+  width: clamp(22%, 1280px, 85%);
   margin: 2.5rem auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -15,14 +15,31 @@ export const Wrapper = styled.div`
   border-radius: 1rem;
   //Color and Styles
   color: ${({ theme }) => theme.mainColor};
-  background-color: ${({ theme }) => theme.blockColor};
+  background-color: ${({ theme }) => theme.bgColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
 
+  .edit {
+    justify-self: flex-end;
+    align-self: flex-end;
+    place-self: flex-end;
+    svg {
+      fill: ${({ theme }) => theme.titleColor} !important;
+      transition: transform 50ms ease-in-out;
+      pointer-events: auto;
+      height: 1.5em;
+      margin-right: 0.33em;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.2, 1.2) translate3d(0, 0, 10px);
+      }
+    }
+  }
   & > h2 {
     grid-area: title;
     margin: 0.5rem 0rem;
     color: ${({ theme }) => theme.titleColor};
+
     &:first-letter {
       text-transform: capitalize;
     }
@@ -70,14 +87,14 @@ const rotate = keyframes`
   }
 `;
 export const CommentsWrapper = styled.section`
-  width: clamp(45%, 680px, 92%);
+  width: clamp(22%, 1280px, 85%);
   min-height: 2rem;
   margin: 2.5rem auto;
   padding: min(3.5%, 1.5rem);
   border-radius: 1rem;
   //Color and Styles
   color: ${({ theme }) => theme.mainColor};
-  background-color: ${({ theme }) => theme.blockColor};
+  background-color: ${({ theme }) => theme.bgColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
   display: flex;
@@ -85,7 +102,7 @@ export const CommentsWrapper = styled.section`
   gap: 0.35em;
   position: relative;
   transition: transform ease-in-out;
-  padding-top: 2em;
+  /* padding-top: 2em; */
 
   .pulse {
     svg {
@@ -96,8 +113,7 @@ export const CommentsWrapper = styled.section`
     position: absolute;
     justify-self: end;
     align-self: end;
-    margin-top: -1em;
-
+    margin-top: -0.3rem;
     svg {
       width: 1.75em;
       fill: ${({ theme }) => theme.accentColor};
@@ -119,9 +135,9 @@ export const CommentContainer = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 0.25em;
+
     font-weight: 600;
-    margin: 0.35em 0;
+
     span {
       font-size: 1em;
       color: ${({ theme }) => theme.titleColor};
@@ -170,7 +186,7 @@ export const FormContainer = styled.form`
     border-radius: 1rem;
     font: inherit;
     border: none;
-    background-color: ${({ theme }) => theme.bgColor};
+    background-color: ${({ theme }) => theme.blockColor};
     color: ${({ theme }) => theme.titleColor};
     margin: 0.5rem 0;
     padding: 0.85rem 0.65rem;

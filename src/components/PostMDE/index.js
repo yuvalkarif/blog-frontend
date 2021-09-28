@@ -1,21 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import {
-  createPost,
-  uploadThumbnail,
-  getPostByID,
-  updatePost,
-} from "../../helpers/api";
+import { createPost, getPostByID, updatePost } from "../../helpers/api";
 import { useHistory, useParams } from "react-router";
 import { Wrapper, Submit } from "./PostMDE.styles";
-import Thumbnail from "./thumbnail";
+
 export default function PostMDE({ user }) {
   const { id } = useParams();
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
-  const [post, setPost] = useState();
-  const fileInput = useRef();
+  const [thumbnail, setThumbnail] = useState("");
+
   const history = useHistory();
   useEffect(() => {
     if (id) {
@@ -26,33 +21,25 @@ export default function PostMDE({ user }) {
 
       setValue(decodeURIComponent(results.body));
       setTitle(results.title);
+      setThumbnail(results.thumbnail);
     }
-  }, []);
+  }, [id]);
 
   const onChange = (value) => {
     setValue(value);
   };
 
   const handleSubmit = async () => {
-    let upload;
-    let img;
+    let img = thumbnail;
 
-    try {
-      upload = await uploadThumbnail(fileInput.current.files[0]);
-      img = upload.data.filename;
-    } catch (error) {
-      console.log(error);
-    }
     if (value && title) {
       const body = value;
       console.log({ body });
       if (id == null) {
-        console.log("post");
         createPost(user, { title, body }, img).then((res) => {
           history.push(`/post/${res.data.post._id}`);
         });
       } else {
-        console.log("update");
         updatePost(user, { title, body, id }, img).then(() => {
           history.push(`/post/${id}`);
         });
@@ -76,7 +63,18 @@ export default function PostMDE({ user }) {
       </label>
 
       <SimpleMDE value={value} onChange={onChange} />
-      <Thumbnail fileInput={fileInput} />
+      {/* <Thumbnail fileInput={fileInput} /> */}
+      <label htmlFor="current-thumbnail">
+        <input
+          type="text"
+          placeholder="Link"
+          name="current-thumbnail"
+          value={thumbnail}
+          onChange={(e) => {
+            setThumbnail(e.target.value);
+          }}
+        ></input>
+      </label>
       <Submit onClick={handleSubmit}>Post</Submit>
     </Wrapper>
   );

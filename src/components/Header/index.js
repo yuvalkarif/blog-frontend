@@ -1,6 +1,7 @@
 import { Container, Wrapper } from "./Header.styles";
 import { useHistory } from "react-router";
-export default function Header({ user, setUser }) {
+import DarkModeToggle from "react-dark-mode-toggle";
+export default function Header({ user, setUser, setIsDarkMode, isDarkMode }) {
   const history = useHistory();
   const goToFeed = () => {
     history.push(`/`);
@@ -25,6 +26,12 @@ export default function Header({ user, setUser }) {
               Log Out
             </span>
           )}
+          <DarkModeToggle
+            className="toggle"
+            onChange={setIsDarkMode}
+            checked={isDarkMode}
+            size={50}
+          />
         </div>
       </Container>
     </Wrapper>

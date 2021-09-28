@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-
+export const Wrapper = styled.div`
   padding: 1.5rem;
   border-radius: 1rem;
   //Color and Styles
@@ -11,23 +9,26 @@ export const Container = styled.div`
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
   gap: 1rem;
-  & > img {
-    max-width: 50%;
-    margin: 0;
-    aspect-ratio: initial;
-  }
-`;
-export const Wrapper = styled.div`
   //Grid
-  width: 100%;
+  /* width: 65%; */
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
-    "title title comment"
-    "info info arrow";
+    "title title ."
+    "info info comment";
 
   //Pos
+  background-image: linear-gradient(
+      to right,
+      rgba(${({ theme }) => theme.rgbBgColor}, 1),
+      rgba(${({ theme }) => theme.rgbBgColor}, 1),
+      rgba(0, 0, 0, 0)
+    ),
+    url(${(props) => props.thumbnail});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center right;
 
   h2 {
     width: fit-content;
@@ -63,10 +64,8 @@ export const Wrapper = styled.div`
     max-height: 10ch;
     overflow: hidden;
   }
+
   .arrow {
-    grid-area: arrow;
-    justify-self: end;
-    align-self: end;
     width: 1.75em;
     fill: ${({ theme }) => theme.accentColor};
     transition: transform 50ms ease-in-out;
@@ -79,27 +78,35 @@ export const Wrapper = styled.div`
 
   .comments {
     /* fill: ${({ theme }) => theme.accentColor}; */
+    background: rgba(${({ theme }) => theme.rgbBgColor}, 0.9);
+    border-radius: 1rem;
+    padding: 0.25em;
     grid-area: comment;
     display: flex;
-    justify-self: end;
-
+    align-self: flex-end;
+    justify-self: flex-end;
     justify-content: center;
     color: ${({ theme }) => theme.titleColor};
+    font-size: 1.5rem;
+    height: fit-content;
+    width: fit-content;
+    span {
+      height: fit-content;
+    }
     & > svg {
       padding-top: 0.1em;
       margin-left: 0.1em;
-      height: 1.2em;
+      height: 1.5rem;
       fill: ${({ theme }) => theme.titleColor};
     }
 
     .delete {
+      height: fit-content;
       svg {
-        justify-self: end;
-        align-self: center;
         fill: ${({ theme }) => theme.redColor} !important;
         transition: transform 50ms ease-in-out;
         pointer-events: auto;
-        height: 1.2em;
+        height: 1.5rem;
         &:hover {
           cursor: pointer;
           transform: scale(1.2, 1.2) translate3d(0, 0, 10px);

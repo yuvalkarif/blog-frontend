@@ -7,12 +7,19 @@ export const Wrapper = styled.section`
   border-radius: 1rem;
   //Color and Styles
   color: ${({ theme }) => theme.mainColor};
-  background-color: ${({ theme }) => theme.blockColor};
+  background-color: ${({ theme }) => theme.bgColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
   .EasyMDEContainer {
     box-sizing: border-box;
-    border-radius: 1rem;
+    margin-bottom: 1rem;
+    * {
+      background-color: ${({ theme }) => theme.blockColor};
+      color: ${({ theme }) => theme.titleColor};
+      border-color: none;
+    }
+    .editor-toolbar {
+    }
   }
   h3 {
     margin: 0 auto;
@@ -22,7 +29,7 @@ export const Wrapper = styled.section`
   label {
     input {
       box-sizing: border-box;
-      background-color: ${({ theme }) => theme.bgColor};
+      background-color: ${({ theme }) => theme.blockColor};
       color: ${({ theme }) => theme.titleColor};
       padding: 0.85rem 0;
       padding-inline: 1rem;
@@ -46,6 +53,7 @@ export const Submit = styled.button`
   margin: 0 auto;
   margin-top: min(3.5%, 1.5rem);
   background-color: ${({ theme }) => theme.bgColor};
+  outline: 2px solid ${({ theme }) => theme.accentColor};
   color: ${({ theme }) => theme.accentColor};
   &:hover {
     color: ${({ theme }) => theme.bgColor};

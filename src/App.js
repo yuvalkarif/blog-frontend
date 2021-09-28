@@ -6,8 +6,10 @@ import {
   Redirect,
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import Theme from "./constants/theme";
+import darkTheme from "./constants/darkTheme";
+import lightTheme from "./constants/lightTheme";
 import Loading from "./components/Loading";
+import { createGlobalStyle } from "styled-components";
 
 function App() {
   const PostPage = lazy(() => import("./components/PostPage"));
@@ -17,6 +19,7 @@ function App() {
   const Login = lazy(() => import("./components/Login"));
   const Header = lazy(() => import("./components/Header"));
   const [user, setUser] = useState({ username: "", token: "" });
+  const [isDarkMode, setIsDarkMode] = useState(() => false);
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     const loggedInToken = localStorage.getItem("token");
@@ -30,11 +33,17 @@ function App() {
   }, []);
   return (
     <Router basename={"/view"}>
-      <ThemeProvider theme={Theme}>
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <GlobalStyle />
         <Redirect to="/" />
         <Switch>
           <Suspense fallback={<Loading />}>
-            <Header user={user} setUser={setUser} />
+            <Header
+              user={user}
+              setUser={setUser}
+              setIsDarkMode={setIsDarkMode}
+              isDarkMode={isDarkMode}
+            />
             <Route exact path="/">
               <Feed user={user} />
             </Route>
@@ -66,3 +75,28 @@ function App() {
 }
 
 export default App;
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color:${({ theme }) => theme.blockColor};
+    h1{
+      font-size: 1rem ;
+      @media (min-width: 960px) {
+        font-size: 2.5rem ;
+      }
+    }
+    h2{
+      font-size: 1.25rem ;
+      @media (min-width: 960px) {
+        font-size: 2.75rem ;
+      }
+    }
+    .body{
+      *{
+        @media (min-width: 960px) {
+        font-size: 1.35rem;
+      }
+      }
+    
+    }
+  }`;

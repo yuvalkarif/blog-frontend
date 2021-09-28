@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   border-radius: 1rem;
   //Color and Styles
   color: ${({ theme }) => theme.mainColor};
-  background-color: ${({ theme }) => theme.blockColor};
+  background-color: ${({ theme }) => theme.bgColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
   display: flex;
@@ -40,7 +40,7 @@ export const FormContainer = styled.form`
       border-radius: 1rem;
       font: inherit;
       border: none;
-      background-color: ${({ theme }) => theme.bgColor};
+      background-color: ${({ theme }) => theme.blockColor};
       color: ${({ theme }) => theme.titleColor};
       padding: 0.85rem 0.5rem;
     }
