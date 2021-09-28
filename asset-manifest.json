@@ -3,12 +3,12 @@
     "static/js/0.753e4270.chunk.js": "/blog-frontend/view/static/js/0.753e4270.chunk.js",
     "static/js/0.753e4270.chunk.js.map": "/blog-frontend/view/static/js/0.753e4270.chunk.js.map",
     "main.css": "/blog-frontend/view/static/css/main.4cc64496.chunk.css",
-    "main.js": "/blog-frontend/view/static/js/main.37b9556d.chunk.js",
-    "main.js.map": "/blog-frontend/view/static/js/main.37b9556d.chunk.js.map",
+    "main.js": "/blog-frontend/view/static/js/main.7771984d.chunk.js",
+    "main.js.map": "/blog-frontend/view/static/js/main.7771984d.chunk.js.map",
     "runtime-main.js": "/blog-frontend/view/static/js/runtime-main.4247d4e7.js",
     "runtime-main.js.map": "/blog-frontend/view/static/js/runtime-main.4247d4e7.js.map",
-    "static/js/3.954212f9.chunk.js": "/blog-frontend/view/static/js/3.954212f9.chunk.js",
-    "static/js/3.954212f9.chunk.js.map": "/blog-frontend/view/static/js/3.954212f9.chunk.js.map",
+    "static/js/3.950d5c72.chunk.js": "/blog-frontend/view/static/js/3.950d5c72.chunk.js",
+    "static/js/3.950d5c72.chunk.js.map": "/blog-frontend/view/static/js/3.950d5c72.chunk.js.map",
     "static/css/4.78dbf52a.chunk.css": "/blog-frontend/view/static/css/4.78dbf52a.chunk.css",
     "static/js/4.c6212f10.chunk.js": "/blog-frontend/view/static/js/4.c6212f10.chunk.js",
     "static/js/4.c6212f10.chunk.js.map": "/blog-frontend/view/static/js/4.c6212f10.chunk.js.map",
@@ -33,14 +33,14 @@
     "index.html": "/blog-frontend/view/index.html",
     "static/css/4.78dbf52a.chunk.css.map": "/blog-frontend/view/static/css/4.78dbf52a.chunk.css.map",
     "static/css/main.4cc64496.chunk.css.map": "/blog-frontend/view/static/css/main.4cc64496.chunk.css.map",
-    "static/js/3.954212f9.chunk.js.LICENSE.txt": "/blog-frontend/view/static/js/3.954212f9.chunk.js.LICENSE.txt",
+    "static/js/3.950d5c72.chunk.js.LICENSE.txt": "/blog-frontend/view/static/js/3.950d5c72.chunk.js.LICENSE.txt",
     "static/js/5.089187b8.chunk.js.LICENSE.txt": "/blog-frontend/view/static/js/5.089187b8.chunk.js.LICENSE.txt",
     "static/js/6.fa2194b5.chunk.js.LICENSE.txt": "/blog-frontend/view/static/js/6.fa2194b5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4247d4e7.js",
-    "static/js/3.954212f9.chunk.js",
+    "static/js/3.950d5c72.chunk.js",
     "static/css/main.4cc64496.chunk.css",
-    "static/js/main.37b9556d.chunk.js"
+    "static/js/main.7771984d.chunk.js"
   ]
 }
