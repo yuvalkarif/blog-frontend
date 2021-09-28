@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   margin: 2.5rem auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 70% 2ch;
+  grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-areas:
     "title title ."
     "body body body"
