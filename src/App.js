@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
@@ -32,7 +32,7 @@ function App() {
     }
   }, []);
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename={""}>
       <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <GlobalStyle />
         <Redirect to="/" />
