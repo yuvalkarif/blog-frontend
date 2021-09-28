@@ -32,7 +32,7 @@ function App() {
     }
   }, []);
   return (
-    <Router basename={"/view"}>
+    <Router basename={process.env.PUBLIC_URL}>
       <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <GlobalStyle />
         <Redirect to="/" />
