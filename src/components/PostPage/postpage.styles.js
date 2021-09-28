@@ -5,9 +5,9 @@ export const Wrapper = styled.div`
   margin: 2.5rem auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(auto-fit, 1fr);
+  grid-template-rows: repeat(auto-fit, 1frf);
   grid-template-areas:
-    "title title ."
+    "title title edit"
     "body body body"
     "info info info";
   //Pos
@@ -18,17 +18,17 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.bgColor};
   font-size: 1.25rem;
   box-shadow: rgba(${({ theme }) => theme.shadowColor}, 0.08) 1em 2em 3.5em 0px;
-
+  gap: 1rem;
   .edit {
+    grid-area: edit;
+    align-self: flex-start;
     justify-self: flex-end;
-    align-self: flex-end;
-    place-self: flex-end;
     svg {
       fill: ${({ theme }) => theme.titleColor} !important;
       transition: transform 50ms ease-in-out;
       pointer-events: auto;
-      height: 1.5em;
-      margin-right: 0.33em;
+      height: 1.5rem;
+
       &:hover {
         cursor: pointer;
         transform: scale(1.2, 1.2) translate3d(0, 0, 10px);
@@ -37,7 +37,7 @@ export const Wrapper = styled.div`
   }
   & > h2 {
     grid-area: title;
-    margin: 0.5rem 0rem;
+    margin: 0;
     color: ${({ theme }) => theme.titleColor};
 
     &:first-letter {
@@ -47,6 +47,9 @@ export const Wrapper = styled.div`
   .body {
     grid-area: body;
     font-size: 1rem;
+    & > * {
+      margin: 0.1em;
+    }
 
     img {
       max-width: 100%;
@@ -170,9 +173,7 @@ export const CommentContainer = styled.div`
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  width: 90%;
-  max-width: 90%;
-  min-width: 90%;
+
   h3 {
     color: ${({ theme }) => theme.titleColor};
     margin: 0.5rem 0;
@@ -180,26 +181,27 @@ export const FormContainer = styled.form`
   }
   textarea,
   input {
+    box-sizing: border-box;
     width: 100%;
-    max-width: 100%;
-    min-width: 100%;
     border-radius: 1rem;
     font: inherit;
     border: none;
     background-color: ${({ theme }) => theme.blockColor};
     color: ${({ theme }) => theme.titleColor};
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
     padding: 0.85rem 0.65rem;
   }
   button {
+    box-sizing: border-box;
     border-radius: 1rem;
     border: none;
-    min-width: 20%;
+    /* min-width: 20%; */
+    justify-self: flex-end;
+    align-self: flex-end;
     padding: 0.85rem 0.65rem;
     font-family: inherit;
     font-weight: 800;
     font-size: 1.05rem;
-    margin-inline: auto -1.5em;
     background-color: ${({ theme }) => theme.bgColor};
     color: ${({ theme }) => theme.accentColor};
     &:hover {
