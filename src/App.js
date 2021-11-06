@@ -10,6 +10,8 @@ import darkTheme from "./constants/darkTheme";
 import lightTheme from "./constants/lightTheme";
 import Loading from "./components/Loading";
 import { createGlobalStyle } from "styled-components";
+import UserContext from "./constants/userContext";
+import Header from "./components/Header/index";
 
 function App() {
   const PostPage = lazy(() => import("./components/PostPage"));
@@ -17,12 +19,14 @@ function App() {
   const PostMDE = lazy(() => import("./components/PostMDE"));
   const Feed = lazy(() => import("./components/Feed"));
   const Login = lazy(() => import("./components/Login"));
-  const Header = lazy(() => import("./components/Header"));
+
   const [user, setUser] = useState({ username: "", token: "" });
-  const [isDarkMode, setIsDarkMode] = useState(() => false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     const loggedInToken = localStorage.getItem("token");
+
     if (loggedInUser && loggedInToken) {
       const foundUser = {
         username: JSON.parse(loggedInUser),
@@ -31,52 +35,56 @@ function App() {
       setUser(foundUser);
     }
   }, []);
+
   return (
-    <Router basename={""}>
+    <UserContext.Provider value={user}>
       <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <Redirect to="/" />
-        <Switch>
-          <Suspense fallback={<Loading />}>
-            <Header
-              user={user}
-              setUser={setUser}
-              setIsDarkMode={setIsDarkMode}
-              isDarkMode={isDarkMode}
-            />
-            <Route exact path="/">
-              <Feed user={user} />
-            </Route>
-            <Route path="/post/:id/edit">
-              <PostMDE user={user} />
-            </Route>
-            <Route exact path="/post/:id">
-              <PostPage user={user} />
-            </Route>
-            <Route exact path="/edit">
-              <PostAdd />
-            </Route>
-            <Route exact path="/admin">
-              {user.username || user.token ? (
-                // <PostAdd user={user} />
-                <PostMDE user={user} />
-              ) : (
-                <Redirect to="/login" />
-              )}
-            </Route>
-            <Route exact path="/login">
-              <Login setUser={setUser} />
-            </Route>
-          </Suspense>
-        </Switch>
+        <Router basename={""}>
+          <Header
+            setUser={setUser}
+            setIsDarkMode={setIsDarkMode}
+            isDarkMode={isDarkMode}
+          />
+          <Switch>
+            <Suspense fallback={<Loading />}>
+              <Route exact path="/">
+                <Feed />
+              </Route>
+              <Route path="/post/:id/edit">
+                <PostMDE />
+              </Route>
+              <Route exact path="/post/:id">
+                <PostPage />
+              </Route>
+              <Route exact path="/edit">
+                <PostAdd />
+              </Route>
+              <Route exact path="/admin">
+                {user?.username || user?.token ? (
+                  <PostMDE />
+                ) : (
+                  <Redirect to="/login" />
+                )}
+              </Route>
+              <Route exact path="/login">
+                <Login setUser={setUser} />
+              </Route>
+            </Suspense>
+          </Switch>
+        </Router>
       </ThemeProvider>
-    </Router>
+    </UserContext.Provider>
   );
 }
 
 export default App;
 
 const GlobalStyle = createGlobalStyle`
+  *{
+    transition: color 150ms ease-in-out; 
+    transition: background-color 150ms ease-in-out; 
+  }
   body {
     background-color:${({ theme }) => theme.blockColor};
     h1{

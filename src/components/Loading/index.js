@@ -1,4 +1,5 @@
 import InlineSVG from "svg-inline-react";
+import { Wrapper } from "./Loading.styles";
 
 export default function Loading() {
   const svgSource = `<?xml version="1.0" encoding="utf-8"?>
@@ -15,8 +16,8 @@ export default function Loading() {
     </circle>
    </svg>`;
   return (
-    <>
+    <Wrapper>
       <InlineSVG src={svgSource}></InlineSVG>
-    </>
+    </Wrapper>
   );
 }

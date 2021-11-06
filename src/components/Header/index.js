@@ -1,8 +1,10 @@
 import { Container, Wrapper } from "./Header.styles";
 import { useHistory } from "react-router";
 import DarkModeToggle from "react-dark-mode-toggle";
-export default function Header({ user, setUser, setIsDarkMode, isDarkMode }) {
+import useUserContext from "../../constants/useUserContext";
+export default function Header({ setUser, setIsDarkMode, isDarkMode }) {
   const history = useHistory();
+  const user = useUserContext();
   const goToFeed = () => {
     history.push(`/`);
   };
@@ -21,7 +23,7 @@ export default function Header({ user, setUser, setIsDarkMode, isDarkMode }) {
           {" "}
           <span onClick={goToFeed}>Feed</span>
           <span onClick={goToAdmin}>Admin</span>
-          {user.username && user.token && (
+          {user?.username && user?.token && (
             <span className="logout" onClick={() => handleLogOut()}>
               Log Out
             </span>

@@ -4,12 +4,14 @@ import "easymde/dist/easymde.min.css";
 import { createPost, getPostByID, updatePost } from "../../helpers/api";
 import { useHistory, useParams } from "react-router";
 import { Wrapper, Submit } from "./PostMDE.styles";
+import useUserContext from "../../constants/useUserContext";
 
-export default function PostMDE({ user }) {
+export default function PostMDE() {
   const { id } = useParams();
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+  const user = useUserContext();
 
   const history = useHistory();
   useEffect(() => {

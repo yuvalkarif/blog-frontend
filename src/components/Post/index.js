@@ -4,9 +4,11 @@ import CommentSVG from "../../svg/comment";
 import TrashSVG from "../../svg/trash";
 import { useHistory } from "react-router-dom";
 import { deletePost } from "../../helpers/api";
+import useUserContext from "../../constants/useUserContext";
 
-export default function Post({ info, user }) {
+export default function Post({ info }) {
   const history = useHistory();
+  const user = useUserContext();
   const goToPost = () => {
     history.push(`/post/${info._id}`);
   };
@@ -24,11 +26,10 @@ export default function Post({ info, user }) {
         {info.title.length > 35 ? info.title.slice(0, 35) + "..." : info.title}
       </h2>
 
-      {info.body.length && console.log(info.body.length)}
       <div className="comments">
         <span>{info.comments.length}</span>
         <CommentSVG />
-        {user.username && user.token && (
+        {user?.username && user?.token && (
           <div className="delete" onClick={handleDelete}>
             <TrashSVG />
           </div>

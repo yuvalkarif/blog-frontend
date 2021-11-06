@@ -13,14 +13,14 @@ import {
 import PlusSVG from "../../svg/plus";
 import ReactMarkdown from "react-markdown";
 import EditSVG from "../../svg/edit";
-
-export default function PostPage({ user }) {
+import useUserContext from "../../constants/useUserContext";
+export default function PostPage() {
   const { id } = useParams();
   const [post, setPost] = useState();
   const [toShowForm, setToShowForm] = useState(false);
   const [empty, setEmpty] = useState(true);
   const history = useHistory();
-
+  const user = useUserContext();
   const [comment, setComment] = useState({
     username: "",
     body: "",
@@ -54,7 +54,7 @@ export default function PostPage({ user }) {
         <>
           <Wrapper>
             <h2>{post.title}</h2>
-            {user.username && user.token && (
+            {user?.username && user?.token && (
               <div className="edit" onClick={handleEdit}>
                 <EditSVG />
               </div>
@@ -121,7 +121,7 @@ export default function PostPage({ user }) {
                           <p>{comment.datetime}</p>
                         </div>
 
-                        {user.username && user.token && (
+                        {user?.username && user?.token && (
                           <div
                             className="delete"
                             onClick={() => handleDelete(comment._id)}

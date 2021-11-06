@@ -1,5 +1,9 @@
 import axios from "axios";
-export const url = process.env.REACT_APP_API_URL;
+export const url =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_API_URL
+    : "http://localhost:8080";
+
 export const getPosts = async () => {
   let posts;
   try {
